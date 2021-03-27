@@ -9,7 +9,7 @@ export const MenuSection = styled.div`
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  max-width: 240px;
+  max-width: 280px;
   width: 100%;
 
   @media screen and (max-width: 750px) {
@@ -42,6 +42,10 @@ export const MiddleContainer = styled.div`
   border: 1px solid rgba(207, 207, 207, 0.25);
   border-radius: 16px;
   margin-top: 18px;
+
+  @media screen and (max-width: 480px) {
+    display: none;
+  }
 `;
 
 export const MiddleWrapper = styled.ul`
@@ -76,6 +80,8 @@ export const MenuIcon4 = styled(BsFillQuestionDiamondFill)`
 export const MenuLi = styled.li`
   color: rgb(183, 193, 204);
   list-style: none;
+  cursor: pointer;
+  width: 100%;
 `;
 export const Select = styled(ReactFlagsSelect)`
   padding: 0;

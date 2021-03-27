@@ -32,8 +32,9 @@ import {
   ChartInputWrapper,
 } from './styles/content';
 import Menu from '../Menu';
+import Sidebar from '../Sidebar';
 
-const Content = () => {
+const Content = ({ openMenu, setOpenMenu }) => {
   const [selected, setSelected] = useState('KR');
   const [showChart, setShowChart] = useState('Bar');
   const [searchCountry, setSearchCountry] = useState('kr');
@@ -41,7 +42,7 @@ const Content = () => {
   const [todayData, setTodayData] = useState({});
   const [coupleDayData, setCoupleDayData] = useState({});
   const [activeData, setActiveData] = useState({});
-  const [comparedData, setComparedData] = useState({});
+  const [entireData, setEntireData] = useState({});
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -91,7 +92,6 @@ const Content = () => {
 
         return acc;
       }, []);
-      console.log(arr);
       const labels = arr.map((value) => `${value.month + 1}월`);
       const confirmed = arr.map((value) => value.confirmed);
       const active = arr.map((value) => value.active);
@@ -112,7 +112,7 @@ const Content = () => {
         labels,
         datasets: [
           {
-            label: '국내 누적 격리자',
+            label: `${selected} 격리자`,
             backgroundColor: 'rgb(86, 115, 235)',
             fill: false,
             borderWidth: 1,
@@ -121,11 +121,10 @@ const Content = () => {
           },
         ],
       });
-      setComparedData({
-        labels: ['확진자', '격리해제', '사망'],
+      setEntireData({
+        labels: ['확진자', '완치자', '사망'],
         datasets: [
           {
-            label: '국내 누적 격리자',
             fontColor: '#fff',
             backgroundColor: ['#ff3d67', '#059dff', '#ffc233'],
             borderColor: ['#ff3d67', '#059dff', '#ffc233'],
@@ -135,7 +134,6 @@ const Content = () => {
         ],
       });
     };
-
     fetchEvents();
   }, [selected, searchCountry]);
 
@@ -146,12 +144,12 @@ const Content = () => {
           <TopWrapper>
             <ConfirmedWrap>
               <H3>확진자</H3>
-              <Figure confirmed>{todayData.Confirmed}</Figure>
-              <IncreaseWrap>
-                <Increase confirmed>
+              <Figure confirmed='true'>{todayData.Confirmed}</Figure>
+              <IncreaseWrap confirmed='true'>
+                <Increase confirmed='true'>
                   {Math.abs(todayData.Confirmed - coupleDayData.Confirmed)}
                 </Increase>
-                <UpIcon confirmed />
+                <UpIcon confirmed='true' />
               </IncreaseWrap>
             </ConfirmedWrap>
             <DeathWrap>
@@ -166,20 +164,20 @@ const Content = () => {
             </DeathWrap>
             <RecoveredWrap>
               <H3>완치자</H3>
-              <Figure recovered>{todayData.Recovered}</Figure>
-              <IncreaseWrap recovered>
-                <Increase recovered>
+              <Figure recovered='true'>{todayData.Recovered}</Figure>
+              <IncreaseWrap recovered='true'>
+                <Increase recovered='true'>
                   {Math.abs(todayData.Recovered - coupleDayData.Recovered)}
                 </Increase>
-                <UpIcon recovered />
+                <UpIcon recovered='true' />
               </IncreaseWrap>
             </RecoveredWrap>
             <CheckerWrap>
               <H3>검사자</H3>
-              <Figure checker>100,070</Figure>
-              <IncreaseWrap>
-                <Increase checker>494</Increase>
-                <UpIcon checker />
+              <Figure checker='true'>100,070</Figure>
+              <IncreaseWrap checker='true'>
+                <Increase checker='true'>494</Increase>
+                <UpIcon checker='true' />
               </IncreaseWrap>
             </CheckerWrap>
           </TopWrapper>
@@ -195,16 +193,16 @@ const Content = () => {
             <VsWrapper>
               <VsWrap>
                 <VsDate>vs 어제</VsDate>
-                <IncreaseWrap confirmed>
-                  <Increase confirmed>25</Increase>
-                  <UpIcon confirmed />
+                <IncreaseWrap confirmed='true'>
+                  <Increase confirmed='true'>25</Increase>
+                  <UpIcon confirmed='true' />
                 </IncreaseWrap>
               </VsWrap>
               <VsWrap>
                 <VsDate>vs 1주전</VsDate>
-                <IncreaseWrap confirmed>
-                  <Increase confirmed>23</Increase>
-                  <UpIcon confirmed />
+                <IncreaseWrap confirmed='true'>
+                  <Increase confirmed='true'>23</Increase>
+                  <UpIcon confirmed='true' />
                 </IncreaseWrap>
               </VsWrap>
             </VsWrapper>
@@ -212,16 +210,16 @@ const Content = () => {
             <VsWrapper>
               <VsWrap>
                 <VsDate>vs 2주전</VsDate>
-                <IncreaseWrap confirmed>
-                  <Increase confirmed>25</Increase>
-                  <UpIcon confirmed />
+                <IncreaseWrap confirmed='true'>
+                  <Increase confirmed='true'>25</Increase>
+                  <UpIcon confirmed='true' />
                 </IncreaseWrap>
               </VsWrap>
               <VsWrap>
                 <VsDate>vs 1달전</VsDate>
-                <IncreaseWrap confirmed>
-                  <Increase confirmed>102</Increase>
-                  <UpIcon confirmed />
+                <IncreaseWrap confirmed='true'>
+                  <Increase confirmed='true'>102</Increase>
+                  <UpIcon confirmed='true' />
                 </IncreaseWrap>
               </VsWrap>
             </VsWrapper>
@@ -238,7 +236,7 @@ const Content = () => {
                 value='Bar'
                 onChange={(e) => setShowChart(e.target.value)}
               />
-              <ChartLabel for='Bar'>누적 통계</ChartLabel>
+              <ChartLabel htmlFor='Bar'>누적 통계</ChartLabel>
               <ChartInput
                 checked={showChart === 'Line' ? true : false}
                 id='Line'
@@ -247,7 +245,7 @@ const Content = () => {
                 value='Line'
                 onChange={(e) => setShowChart(e.target.value)}
               />
-              <ChartLabel for='Line'>격리자 통계</ChartLabel>
+              <ChartLabel htmlFor='Line'>격리자 통계</ChartLabel>
               <ChartInput
                 checked={showChart === 'Doughnut' ? true : false}
                 id='Doughnut'
@@ -256,7 +254,7 @@ const Content = () => {
                 value='Doughnut'
                 onChange={(e) => setShowChart(e.target.value)}
               />
-              <ChartLabel for='Doughnut'>전체 통계</ChartLabel>
+              <ChartLabel htmlFor='Doughnut'>전체 통계</ChartLabel>
             </ChartInputWrapper>
             {showChart === 'Bar' ? (
               <ContentsWrapper>
@@ -346,7 +344,7 @@ const Content = () => {
               <ContentsWrapper>
                 <ContentH2>{selected} 코로나 현황</ContentH2>
                 <Doughnut
-                  data={comparedData}
+                  data={entireData}
                   options={
                     ({
                       title: {
@@ -375,6 +373,13 @@ const Content = () => {
         </BottomContainer>
       </MainContentSection>
       <Menu
+        selected={selected}
+        setSelected={setSelected}
+        setSearchCountry={setSearchCountry}
+      />
+      <Sidebar
+        setOpenMenu={setOpenMenu}
+        openMenu={openMenu}
         selected={selected}
         setSelected={setSelected}
         setSearchCountry={setSearchCountry}

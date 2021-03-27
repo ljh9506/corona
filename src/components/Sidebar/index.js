@@ -1,42 +1,42 @@
 import React from 'react';
+
 import {
-  BottomWrapper,
-  DarkModeText,
-  DarkModeTrigger,
-  DarkModeWrap,
-  Icon,
-  MenuLi,
-  MenuSection,
-  BottomContainer,
-  MiddleContainer,
-  MiddleWrapper,
-  TopContainer,
-  TopWrapper,
-  TopH1,
-  MenuLiWrap,
+  CloseIcon,
+  Container,
+  MenuWrapper,
+  Wrapper,
   MenuIcon1,
+  MenuIcon2,
   MenuIcon3,
   MenuIcon4,
+  MenuLi,
+  MenuLiWrap,
   Select,
-  MenuIcon2,
-} from './styles/menu';
+} from './styles/sidebar';
 
-const Menu = ({ setSelected, setSearchCountry, selected }) => {
+const Sidebar = ({
+  openMenu,
+  setOpenMenu,
+  selected,
+  setSelected,
+  setSearchCountry,
+}) => {
   return (
-    <MenuSection>
-      <TopContainer>
-        <TopWrapper>
-          <TopH1>CORONA</TopH1>
-        </TopWrapper>
-      </TopContainer>
-      <MiddleContainer>
-        <MiddleWrapper>
+    <Container openMenu={openMenu}>
+      <CloseIcon
+        onClick={() => {
+          setOpenMenu(!openMenu);
+        }}
+      />
+      <Wrapper>
+        <MenuWrapper>
           <MenuLiWrap>
             <MenuIcon1 />
             <MenuLi
               onClick={() => {
                 setSelected('KR');
                 setSearchCountry('KR');
+                setOpenMenu(false);
               }}>
               국내
             </MenuLi>
@@ -68,6 +68,7 @@ const Menu = ({ setSelected, setSearchCountry, selected }) => {
               onSelect={(code) => {
                 setSelected(code);
                 setSearchCountry(code);
+                setOpenMenu(false);
               }}
             />
           </MenuLiWrap>
@@ -79,19 +80,10 @@ const Menu = ({ setSelected, setSearchCountry, selected }) => {
             <MenuIcon4 />
             <MenuLi>자주 묻는 질문</MenuLi>
           </MenuLiWrap>
-        </MiddleWrapper>
-      </MiddleContainer>
-      <BottomContainer>
-        <BottomWrapper>
-          <DarkModeWrap>
-            <Icon />
-            <DarkModeText>다크모드</DarkModeText>
-            <DarkModeTrigger>?</DarkModeTrigger>
-          </DarkModeWrap>
-        </BottomWrapper>
-      </BottomContainer>
-    </MenuSection>
+        </MenuWrapper>
+      </Wrapper>
+    </Container>
   );
 };
 
-export default Menu;
+export default Sidebar;

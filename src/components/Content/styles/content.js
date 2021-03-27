@@ -30,6 +30,10 @@ export const TopContainer = styled.div`
   border: 1px solid rgba(207, 207, 207, 0.25);
   border-radius: 16px;
   padding: 0 20px;
+
+  @media screen and (max-width: 480px) {
+    padding: 0;
+  }
 `;
 
 export const TopWrapper = styled.div`
@@ -133,6 +137,9 @@ export const MiddleContainer = styled.div`
   border-radius: 16px;
   margin-top: 18px;
   padding: 0 20px;
+  @media screen and (max-width: 480px) {
+    padding: 0;
+  }
 `;
 
 export const MiddleWrapper = styled.div`
@@ -150,12 +157,19 @@ export const TodayConfirmedWrap = styled.div`
 export const TodayConfirmedP = styled.div`
   color: rgb(183, 193, 204);
   font-size: 12px;
+  @media screen and (max-width: 480px) {
+    font-size: 8px;
+  }
 `;
 
 export const TodayConfirmedFigure = styled.h2`
   color: rgb(207, 207, 207);
   font-size: 32px;
   margin: 4px 0;
+
+  @media screen and (max-width: 480px) {
+    font-size: 28px;
+  }
 `;
 
 export const VsWrapper = styled.div`
@@ -189,6 +203,10 @@ export const BottomContainer = styled.div`
   border-radius: 16px;
   padding: 12px 20px;
   margin-top: 18px;
+
+  @media screen and (max-width: 480px) {
+    padding: 0;
+  }
 `;
 
 export const ContentH2 = styled.div`

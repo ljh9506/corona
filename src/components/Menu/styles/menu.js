@@ -3,6 +3,7 @@ import { IoEarthSharp } from 'react-icons/io5';
 import { GiSouthKorea } from 'react-icons/gi';
 import { BsFillQuestionDiamondFill } from 'react-icons/bs';
 import { RiPinDistanceLine } from 'react-icons/ri';
+import ReactFlagsSelect from 'react-flags-select';
 
 export const MenuSection = styled.div`
   padding: 1rem;
@@ -75,6 +76,9 @@ export const MenuIcon4 = styled(BsFillQuestionDiamondFill)`
 export const MenuLi = styled.li`
   color: rgb(183, 193, 204);
   list-style: none;
+`;
+export const Select = styled(ReactFlagsSelect)`
+  padding: 0;
 `;
 
 export const BottomContainer = styled.div`

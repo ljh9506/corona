@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
   BottomWrapper,
@@ -16,12 +16,13 @@ import {
   TopH1,
   MenuLiWrap,
   MenuIcon1,
-  MenuIcon2,
   MenuIcon3,
   MenuIcon4,
+  Select,
 } from './styles/menu';
 
-const Menu = () => {
+const Menu = ({ setSearchCountry }) => {
+  const [selected, setSelected] = useState('KR');
   return (
     <MenuSection>
       <TopContainer>
@@ -36,8 +37,33 @@ const Menu = () => {
             <MenuLi>국내</MenuLi>
           </MenuLiWrap>
           <MenuLiWrap>
-            <MenuIcon2 />
-            <MenuLi>세계</MenuLi>
+            <Select
+              countries={[
+                'KR',
+                'JP',
+                'CA',
+                'GB',
+                'FR',
+                'CH',
+                'DE',
+                'IT',
+                'AU',
+                'IN',
+                'RU',
+                'TW',
+                'BR',
+                'DK',
+                'TH',
+                'VN',
+                'PH',
+              ]}
+              searchable
+              selected={selected}
+              onSelect={(code) => {
+                setSelected(code);
+                setSearchCountry(code);
+              }}
+            />
           </MenuLiWrap>
           <MenuLiWrap>
             <MenuIcon3 />

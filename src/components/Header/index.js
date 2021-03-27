@@ -10,10 +10,10 @@ const Header = () => {
   return (
     <HeaderContainer>
       <HeaderH1>COVID-19</HeaderH1>
-      <HeaderSelect>
+      {/* <HeaderSelect>
         <HeaderOption>국내</HeaderOption>
         <HeaderOption>세계</HeaderOption>
-      </HeaderSelect>
+      </HeaderSelect> */}
     </HeaderContainer>
   );
 };

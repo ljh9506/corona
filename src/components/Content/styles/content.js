@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro';
+import { AiOutlineArrowUp } from 'react-icons/ai';
 
 export const MainLayout = styled.div`
   display: flex;
@@ -73,7 +74,7 @@ export const H3 = styled.h3`
 export const Figure = styled.div`
   font-size: 16px;
   font-weight: bold;
-  margin: 5px 0;
+  margin: 5px 0 10px 0;
   color: ${({ confirmed, recovered, checker }) =>
     confirmed
       ? 'rgb(235, 83, 116)'
@@ -83,9 +84,24 @@ export const Figure = styled.div`
       ? 'rgb(86, 115, 235)'
       : 'rgb(183, 193, 204)'};
 `;
+export const IncreaseWrap = styled.div`
+  display: flex;
+  align-items: center;
+  background-color: ${({ confirmed, recovered, checker }) =>
+    confirmed
+      ? 'rgba(235, 83, 116, 0.082)'
+      : recovered
+      ? 'rgba(22, 171, 22, 0.082)'
+      : checker
+      ? 'rgba(86, 115, 235, 0.082)'
+      : 'rgb(39, 43, 56)'};
+  border-radius: 12px;
+  padding: 0 6px;
+`;
 
 export const Increase = styled.div`
   font-size: 11.5px;
+  font-weight: bold;
   color: ${({ confirmed, recovered, checker }) =>
     confirmed
       ? 'rgb(235, 83, 116)'
@@ -94,6 +110,20 @@ export const Increase = styled.div`
       : checker
       ? 'rgb(86, 115, 235)'
       : 'rgb(183, 193, 204)'};
+  margin-right: 4px;
+`;
+
+export const UpIcon = styled(AiOutlineArrowUp)`
+  color: ${({ confirmed, recovered, checker }) =>
+    confirmed
+      ? 'rgb(235, 83, 116)'
+      : recovered
+      ? 'rgb(23, 138, 23)'
+      : checker
+      ? 'rgb(86, 115, 235)'
+      : 'rgb(183, 193, 204)'};
+  font-size: 12px;
+  font-weight: bold;
 `;
 
 export const MiddleContainer = styled.div`
@@ -141,6 +171,7 @@ export const VsWrap = styled.div`
 export const VsDate = styled.div`
   color: rgb(183, 193, 204);
   font-size: 12px;
+  margin-right: 6px;
 `;
 
 export const VsFigure = styled.div`
@@ -162,7 +193,7 @@ export const BottomContainer = styled.div`
 
 export const ContentH2 = styled.div`
   color: rgb(207, 207, 207);
-  padding: 14px 14px 20px 14px;
+  padding: 14px 14px 20px 5px;
 `;
 
 export const ContentsContainer = styled.div``;

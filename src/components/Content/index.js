@@ -26,23 +26,28 @@ import {
   ContentH2,
   ContentsContainer,
   ContentsWrapper,
+  UpIcon,
+  IncreaseWrap,
 } from './styles/content';
 import Menu from '../Menu';
 
 const Content = () => {
+  const [searchCountry, setSearchCountry] = useState('kr');
   const [confirmedData, setConfirmedData] = useState({});
   const [todayData, setTodayData] = useState({});
+  const [coupleDayData, setCoupleDayData] = useState({});
   const [activeData, setActiveData] = useState({});
   const [comparedData, setComparedData] = useState({});
 
   useEffect(() => {
     const fetchEvents = async () => {
       const { data } = await axios.get(
-        'https://api.covid19api.com/dayone/country/kr',
+        `https://api.covid19api.com/dayone/country/${searchCountry}`,
       );
       manuFactureData(data);
-      console.log(data[data.length - 1]);
+      console.log(data);
       setTodayData(data[data.length - 1]);
+      setCoupleDayData(data[data.length - 2]);
     };
 
     const manuFactureData = (data) => {
@@ -59,7 +64,7 @@ const Content = () => {
         const findItem = acc.find(
           (item) => item.year === year && item.month === month,
         );
-        if (!findItem && year !== 2021) {
+        if (!findItem) {
           acc.push({
             year,
             month,
@@ -126,7 +131,7 @@ const Content = () => {
     };
 
     fetchEvents();
-  }, []);
+  }, [searchCountry]);
 
   return (
     <MainLayout>
@@ -136,22 +141,40 @@ const Content = () => {
             <ConfirmedWrap>
               <H3>확진자</H3>
               <Figure confirmed>{todayData.Confirmed}</Figure>
-              <Increase confirmed>494</Increase>
+              <IncreaseWrap>
+                <Increase confirmed>
+                  {Math.abs(todayData.Confirmed - coupleDayData.Confirmed)}
+                </Increase>
+                <UpIcon confirmed />
+              </IncreaseWrap>
             </ConfirmedWrap>
             <DeathWrap>
               <H3>사망자</H3>
               <Figure>{todayData.Deaths}</Figure>
-              <Increase>494</Increase>
+              <IncreaseWrap>
+                <Increase>
+                  {Math.abs(todayData.Deaths - coupleDayData.Deaths)}
+                </Increase>
+                <UpIcon />
+              </IncreaseWrap>
             </DeathWrap>
             <RecoveredWrap>
               <H3>완치자</H3>
               <Figure recovered>{todayData.Recovered}</Figure>
-              <Increase recovered>494</Increase>
+              <IncreaseWrap recovered>
+                <Increase recovered>
+                  {Math.abs(todayData.Recovered - coupleDayData.Recovered)}
+                </Increase>
+                <UpIcon recovered />
+              </IncreaseWrap>
             </RecoveredWrap>
             <CheckerWrap>
               <H3>검사자</H3>
               <Figure checker>100,070</Figure>
-              <Increase checker>494</Increase>
+              <IncreaseWrap>
+                <Increase checker>494</Increase>
+                <UpIcon checker />
+              </IncreaseWrap>
             </CheckerWrap>
           </TopWrapper>
         </TopContainer>
@@ -159,27 +182,41 @@ const Content = () => {
           <MiddleWrapper>
             <TodayConfirmedWrap>
               <TodayConfirmedP>오늘 확진자수</TodayConfirmedP>
-              <TodayConfirmedFigure>357명</TodayConfirmedFigure>
+              <TodayConfirmedFigure>
+                {Math.abs(todayData.Confirmed - coupleDayData.Confirmed)}명
+              </TodayConfirmedFigure>
             </TodayConfirmedWrap>
             <VsWrapper>
               <VsWrap>
                 <VsDate>vs 어제</VsDate>
-                <VsFigure>100</VsFigure>
+                <IncreaseWrap confirmed>
+                  <Increase confirmed>25</Increase>
+                  <UpIcon confirmed />
+                </IncreaseWrap>
               </VsWrap>
               <VsWrap>
-                <VsDate>vs 어제</VsDate>
-                <VsFigure>100</VsFigure>
+                <VsDate>vs 1주전</VsDate>
+                <IncreaseWrap confirmed>
+                  <Increase confirmed>23</Increase>
+                  <UpIcon confirmed />
+                </IncreaseWrap>
               </VsWrap>
             </VsWrapper>
 
             <VsWrapper>
               <VsWrap>
-                <VsDate>vs 어제</VsDate>
-                <VsFigure>100</VsFigure>
+                <VsDate>vs 2주전</VsDate>
+                <IncreaseWrap confirmed>
+                  <Increase confirmed>25</Increase>
+                  <UpIcon confirmed />
+                </IncreaseWrap>
               </VsWrap>
               <VsWrap>
-                <VsDate>vs 어제</VsDate>
-                <VsFigure>100</VsFigure>
+                <VsDate>vs 1달전</VsDate>
+                <IncreaseWrap confirmed>
+                  <Increase confirmed>102</Increase>
+                  <UpIcon confirmed />
+                </IncreaseWrap>
               </VsWrap>
             </VsWrapper>
           </MiddleWrapper>
@@ -259,7 +296,7 @@ const Content = () => {
           </ContentsContainer>
         </BottomContainer>
       </MainContentSection>
-      <Menu />
+      <Menu setSearchCountry={setSearchCountry} />
     </MainLayout>
   );
 };

@@ -22,16 +22,20 @@ import {
   VsWrapper,
   VsWrap,
   VsDate,
-  VsFigure,
   ContentH2,
   ContentsContainer,
   ContentsWrapper,
   UpIcon,
   IncreaseWrap,
+  ChartLabel,
+  ChartInput,
+  ChartInputWrapper,
 } from './styles/content';
 import Menu from '../Menu';
 
 const Content = () => {
+  const [selected, setSelected] = useState('KR');
+  const [showChart, setShowChart] = useState('Bar');
   const [searchCountry, setSearchCountry] = useState('kr');
   const [confirmedData, setConfirmedData] = useState({});
   const [todayData, setTodayData] = useState({});
@@ -97,7 +101,7 @@ const Content = () => {
         labels,
         datasets: [
           {
-            label: '국내 누적 확진자',
+            label: `${selected} 누적 확진자`,
             backgroundColor: 'salmon',
             fill: true,
             data: confirmed,
@@ -109,8 +113,10 @@ const Content = () => {
         datasets: [
           {
             label: '국내 누적 격리자',
-            backgroundColor: 'salmon',
+            backgroundColor: 'rgb(86, 115, 235)',
             fill: false,
+            borderWidth: 1,
+            borderColor: 'rgb(86, 115, 235)',
             data: active,
           },
         ],
@@ -131,7 +137,7 @@ const Content = () => {
     };
 
     fetchEvents();
-  }, [searchCountry]);
+  }, [selected, searchCountry]);
 
   return (
     <MainLayout>
@@ -222,81 +228,157 @@ const Content = () => {
           </MiddleWrapper>
         </MiddleContainer>
         <BottomContainer>
-          <ContentH2>국내 코로나현황</ContentH2>
           <ContentsContainer>
-            <ContentsWrapper>
-              <Bar
-                data={confirmedData}
-                options={
-                  ({
-                    title: {
-                      display: true,
-                      text: '누적 확진자 추이',
-                      fontSize: 16,
+            <ChartInputWrapper>
+              <ChartInput
+                checked={showChart === 'Bar' ? true : false}
+                id='Bar'
+                type='radio'
+                name='chart'
+                value='Bar'
+                onChange={(e) => setShowChart(e.target.value)}
+              />
+              <ChartLabel for='Bar'>누적 통계</ChartLabel>
+              <ChartInput
+                checked={showChart === 'Line' ? true : false}
+                id='Line'
+                type='radio'
+                name='chart'
+                value='Line'
+                onChange={(e) => setShowChart(e.target.value)}
+              />
+              <ChartLabel for='Line'>격리자 통계</ChartLabel>
+              <ChartInput
+                checked={showChart === 'Doughnut' ? true : false}
+                id='Doughnut'
+                type='radio'
+                name='chart'
+                value='Doughnut'
+                onChange={(e) => setShowChart(e.target.value)}
+              />
+              <ChartLabel for='Doughnut'>전체 통계</ChartLabel>
+            </ChartInputWrapper>
+            {showChart === 'Bar' ? (
+              <ContentsWrapper>
+                <ContentH2>{selected} 코로나 누적확진자 현황</ContentH2>
+                <Bar
+                  data={confirmedData}
+                  options={
+                    ({
+                      title: {
+                        display: true,
+                        text: '누적 확진자 추이',
+                        fontSize: 16,
+                      },
                     },
-                  },
-                  {
-                    legend: {
-                      display: true,
-                      position: 'bottom',
-                      labels: { fontColor: 'rgb(183, 193, 204)' },
-                    },
-                    scales: {
-                      xAxes: [
-                        {
-                          ticks: {
-                            fontColor: 'rgb(183, 193, 204)',
-                          },
+                    {
+                      legend: {
+                        display: true,
+                        position: 'bottom',
+                        labels: {
+                          fontColor: 'rgb(183, 193, 204)',
+                          padding: 20,
                         },
-                      ],
-                      yAxes: [
-                        {
-                          ticks: {
-                            fontColor: 'rgb(183, 193, 204)',
+                      },
+                      scales: {
+                        xAxes: [
+                          {
+                            ticks: {
+                              fontColor: 'rgb(183, 193, 204)',
+                            },
                           },
+                        ],
+                        yAxes: [
+                          {
+                            ticks: {
+                              fontColor: 'rgb(183, 193, 204)',
+                            },
+                          },
+                        ],
+                      },
+                    })
+                  }
+                />
+              </ContentsWrapper>
+            ) : showChart === 'Line' ? (
+              <ContentsWrapper>
+                <ContentH2>{selected} 코로나 누적격리자 현황</ContentH2>
+                <Line
+                  data={activeData}
+                  options={
+                    ({
+                      title: {
+                        display: true,
+                        text: '누적 확진자 추이',
+                        fontSize: 16,
+                      },
+                    },
+                    {
+                      legend: {
+                        display: true,
+                        position: 'bottom',
+                        labels: {
+                          fontColor: 'rgb(183, 193, 204)',
+                          padding: 20,
                         },
-                      ],
+                      },
+                      scales: {
+                        xAxes: [
+                          {
+                            ticks: {
+                              fontColor: 'rgb(183, 193, 204)',
+                            },
+                          },
+                        ],
+                        yAxes: [
+                          {
+                            ticks: {
+                              fontColor: 'rgb(183, 193, 204)',
+                            },
+                          },
+                        ],
+                      },
+                    })
+                  }
+                />
+              </ContentsWrapper>
+            ) : showChart === 'Doughnut' ? (
+              <ContentsWrapper>
+                <ContentH2>{selected} 코로나 현황</ContentH2>
+                <Doughnut
+                  data={comparedData}
+                  options={
+                    ({
+                      title: {
+                        display: true,
+                        text: `누적, 확진, 해제, 사망 (${
+                          new Date().getMonth() + 1
+                        }월)`,
+                        fontSize: 16,
+                      },
                     },
-                  })
-                }
-              />
-            </ContentsWrapper>
-            {/* <ContentsWrapper>
-              <Line
-                data={activeData}
-                options={
-                  ({
-                    title: {
-                      display: true,
-                      text: '누적 확진자 추이',
-                      fontSize: 16,
-                    },
-                  },
-                  { legend: { display: true, position: 'bottom' } })
-                }
-              />
-            </ContentsWrapper>
-            <ContentsWrapper>
-              <Doughnut
-                data={comparedData}
-                options={
-                  ({
-                    title: {
-                      display: true,
-                      text: `누적, 확진, 해제, 사망 (${
-                        new Date().getMonth() + 1
-                      }월)`,
-                      fontSize: 16,
-                    },
-                  },
-                  { legend: { display: true, position: 'bottom' } })
-                }
-              />
-            </ContentsWrapper> */}
+                    {
+                      legend: {
+                        display: true,
+                        position: 'bottom',
+                        labels: {
+                          fontColor: 'rgb(183, 193, 204)',
+                          padding: 20,
+                        },
+                      },
+                    })
+                  }
+                />
+              </ContentsWrapper>
+            ) : null}
           </ContentsContainer>
         </BottomContainer>
       </MainContentSection>
-      <Menu setSearchCountry={setSearchCountry} />
+      <Menu
+        selected={selected}
+        setSelected={setSelected}
+        setSearchCountry={setSearchCountry}
+      />
     </MainLayout>
   );
 };

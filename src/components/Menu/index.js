@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import {
   BottomWrapper,
@@ -21,8 +21,7 @@ import {
   Select,
 } from './styles/menu';
 
-const Menu = ({ setSearchCountry }) => {
-  const [selected, setSelected] = useState('KR');
+const Menu = ({ setSelected, setSearchCountry, selected }) => {
   return (
     <MenuSection>
       <TopContainer>
@@ -61,6 +60,7 @@ const Menu = ({ setSearchCountry }) => {
               selected={selected}
               onSelect={(code) => {
                 setSelected(code);
+                console.log(code);
                 setSearchCountry(code);
               }}
             />

@@ -199,3 +199,52 @@ export const ContentH2 = styled.div`
 export const ContentsContainer = styled.div``;
 
 export const ContentsWrapper = styled.div``;
+
+export const ChartInputWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+`;
+export const ChartInput = styled.input`
+  background-color: black;
+  outline: none;
+  color: pink;
+
+  &:focus {
+    outline: none;
+  }
+  &::after {
+    width: 9px;
+    height: 9px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: #d1d3d1;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+  }
+  &:checked::after {
+    width: 9px;
+    height: 9px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: rgb(16, 20, 33);
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+  }
+`;
+export const ChartLabel = styled.label`
+  color: rgb(207, 207, 207);
+  margin-right: 12px;
+  user-select: none;
+  font-size: 14px;
+  font-weight: bold;
+`;

@@ -5,6 +5,7 @@ export const GlobalStyles = createGlobalStyle`
 
 * {
   font-family: 'Noto Sans KR', sans-serif;
+  box-sizing: border-box;
 }
 
 .container {
@@ -14,6 +15,8 @@ export const GlobalStyles = createGlobalStyle`
 
 body {
   background-color: rgb(16, 20, 33);
+  margin: 0;
+  padding: 0;
 }
 
 `;

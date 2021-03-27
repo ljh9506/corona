@@ -3,6 +3,12 @@ import styled from 'styled-components/macro';
 export const MainLayout = styled.div`
   display: flex;
   justify-content: center;
+  padding-top: 20px;
+
+  @media screen and (max-width: 750px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 export const MainContentSection = styled.section`
   padding: 1rem;
@@ -11,6 +17,10 @@ export const MainContentSection = styled.section`
   flex-direction: column;
   max-width: 510px;
   width: 100%;
+
+  @media screen and (max-width: 750px) {
+    order: 2;
+  }
 `;
 
 export const TopContainer = styled.div`
@@ -18,6 +28,7 @@ export const TopContainer = styled.div`
   background-color: rgb(25, 31, 44);
   border: 1px solid rgba(207, 207, 207, 0.25);
   border-radius: 16px;
+  padding: 0 20px;
 `;
 
 export const TopWrapper = styled.div`
@@ -55,19 +66,34 @@ export const CheckerWrap = styled.div`
 
 export const H3 = styled.h3`
   font-size: 12px;
-  margin: 5px 0;
   color: rgb(183, 193, 204);
+  margin: 0;
 `;
 
 export const Figure = styled.div`
   font-size: 16px;
   font-weight: bold;
-  color: rgb(183, 193, 204);
+  margin: 5px 0;
+  color: ${({ confirmed, recovered, checker }) =>
+    confirmed
+      ? 'rgb(235, 83, 116)'
+      : recovered
+      ? 'rgb(23, 138, 23)'
+      : checker
+      ? 'rgb(86, 115, 235)'
+      : 'rgb(183, 193, 204)'};
 `;
 
 export const Increase = styled.div`
   font-size: 11.5px;
-  color: rgb(183, 193, 204);
+  color: ${({ confirmed, recovered, checker }) =>
+    confirmed
+      ? 'rgb(235, 83, 116)'
+      : recovered
+      ? 'rgb(23, 138, 23)'
+      : checker
+      ? 'rgb(86, 115, 235)'
+      : 'rgb(183, 193, 204)'};
 `;
 
 export const MiddleContainer = styled.div`
@@ -76,6 +102,7 @@ export const MiddleContainer = styled.div`
   border: 1px solid rgba(207, 207, 207, 0.25);
   border-radius: 16px;
   margin-top: 18px;
+  padding: 0 20px;
 `;
 
 export const MiddleWrapper = styled.div`
@@ -92,7 +119,7 @@ export const TodayConfirmedWrap = styled.div`
 
 export const TodayConfirmedP = styled.div`
   color: rgb(183, 193, 204);
-  font-size: 18px;
+  font-size: 12px;
 `;
 
 export const TodayConfirmedFigure = styled.h2`
@@ -129,6 +156,7 @@ export const BottomContainer = styled.div`
   background-color: rgb(25, 31, 44);
   border: 1px solid rgba(207, 207, 207, 0.25);
   border-radius: 16px;
+  padding: 12px 20px;
   margin-top: 18px;
 `;
 

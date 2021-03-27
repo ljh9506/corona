@@ -27,9 +27,11 @@ import {
   ContentsContainer,
   ContentsWrapper,
 } from './styles/content';
+import Menu from '../Menu';
 
 const Content = () => {
   const [confirmedData, setConfirmedData] = useState({});
+  const [todayData, setTodayData] = useState({});
   const [activeData, setActiveData] = useState({});
   const [comparedData, setComparedData] = useState({});
 
@@ -39,6 +41,8 @@ const Content = () => {
         'https://api.covid19api.com/dayone/country/kr',
       );
       manuFactureData(data);
+      console.log(data[data.length - 1]);
+      setTodayData(data[data.length - 1]);
     };
 
     const manuFactureData = (data) => {
@@ -78,7 +82,7 @@ const Content = () => {
 
         return acc;
       }, []);
-
+      console.log(arr);
       const labels = arr.map((value) => `${value.month + 1}월`);
       const confirmed = arr.map((value) => value.confirmed);
       const active = arr.map((value) => value.active);
@@ -131,23 +135,23 @@ const Content = () => {
           <TopWrapper>
             <ConfirmedWrap>
               <H3>확진자</H3>
-              <Figure>100,070</Figure>
-              <Increase>494</Increase>
+              <Figure confirmed>{todayData.Confirmed}</Figure>
+              <Increase confirmed>494</Increase>
             </ConfirmedWrap>
             <DeathWrap>
               <H3>사망자</H3>
-              <Figure>100,070</Figure>
+              <Figure>{todayData.Deaths}</Figure>
               <Increase>494</Increase>
             </DeathWrap>
             <RecoveredWrap>
               <H3>완치자</H3>
-              <Figure>100,070</Figure>
-              <Increase>494</Increase>
+              <Figure recovered>{todayData.Recovered}</Figure>
+              <Increase recovered>494</Increase>
             </RecoveredWrap>
             <CheckerWrap>
               <H3>검사자</H3>
-              <Figure>100,070</Figure>
-              <Increase>494</Increase>
+              <Figure checker>100,070</Figure>
+              <Increase checker>494</Increase>
             </CheckerWrap>
           </TopWrapper>
         </TopContainer>
@@ -255,6 +259,7 @@ const Content = () => {
           </ContentsContainer>
         </BottomContainer>
       </MainContentSection>
+      <Menu />
     </MainLayout>
   );
 };

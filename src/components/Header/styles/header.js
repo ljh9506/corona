@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
 export const HeaderContainer = styled.div`
-  background-color: #3b5998;
+  background-color: rgb(25, 31, 44);
   display: flex;
   justify-content: space-between;
   padding: 1rem 2rem;
   align-items: center;
 `;
 export const HeaderH1 = styled.h1`
-  color: #fff;
+  color: rgb(183, 193, 204);
 `;
 export const HeaderSelect = styled.select`
   height: 30px;

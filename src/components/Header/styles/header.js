@@ -1,4 +1,3 @@
-import { FaBars } from 'react-icons/fa';
 import styled from 'styled-components';
 
 export const HeaderContainer = styled.div`
@@ -8,20 +7,6 @@ export const HeaderContainer = styled.div`
   justify-content: space-between;
   padding: 0 2rem;
   align-items: center;
-`;
-export const MenuBars = styled(FaBars)`
-  display: none;
-  position: absolute;
-  color: #fff;
-  font-size: 22px;
-  right: 30px;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-
-  @media screen and (max-width: 480px) {
-    display: block;
-  }
 `;
 
 export const HeaderH1 = styled.h1`

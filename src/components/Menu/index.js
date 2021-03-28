@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { FaMoon, FaSun } from 'react-icons/fa';
 import {
   BottomWrapper,
   DarkModeText,
-  DarkModeTrigger,
   DarkModeWrap,
-  Icon,
+  DarkModeSwitch,
+  ToggleIcon,
+  DarkModeSwitchWrap,
   MenuLi,
   MenuSection,
   BottomContainer,
@@ -19,15 +21,30 @@ import {
   MenuIcon4,
   Select,
   MenuIcon2,
+  DarkModeLabel,
+  MenuBars,
 } from './styles/menu';
 
-const Menu = ({ setSelected, setSearchCountry, selected }) => {
+const Menu = ({
+  setSelected,
+  setSearchCountry,
+  selected,
+  toggleTheme,
+  setOpenMenu,
+  openMenu,
+}) => {
+  const [darkMode, setDarkMode] = useState(false);
   return (
     <MenuSection>
       <TopContainer>
         <TopWrapper>
           <TopH1>CORONA</TopH1>
         </TopWrapper>
+        <MenuBars
+          onClick={() => {
+            setOpenMenu(!openMenu);
+          }}
+        />
       </TopContainer>
       <MiddleContainer>
         <MiddleWrapper>
@@ -83,10 +100,23 @@ const Menu = ({ setSelected, setSearchCountry, selected }) => {
       </MiddleContainer>
       <BottomContainer>
         <BottomWrapper>
-          <DarkModeWrap>
-            <Icon />
-            <DarkModeText>다크모드</DarkModeText>
-            <DarkModeTrigger>?</DarkModeTrigger>
+          <DarkModeWrap
+            onClick={() => {
+              setDarkMode(!darkMode);
+              toggleTheme();
+            }}>
+            <DarkModeLabel>다크모드</DarkModeLabel>
+            <DarkModeSwitchWrap>
+              <DarkModeSwitch darkMode={darkMode} />
+              <DarkModeText darkMode={darkMode}>
+                <ToggleIcon>
+                  <FaMoon size='20' />
+                </ToggleIcon>
+                <ToggleIcon>
+                  <FaSun size='20' />
+                </ToggleIcon>
+              </DarkModeText>
+            </DarkModeSwitchWrap>
           </DarkModeWrap>
         </BottomWrapper>
       </BottomContainer>

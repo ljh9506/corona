@@ -17,7 +17,7 @@ export const Container = styled.div`
   height: 100%;
   background-color: rgb(16, 20, 33);
   transition: 0.3s ease-in-out;
-
+  display: ${({ openMenu }) => (openMenu ? 'block' : 'none')};
   left: ${({ openMenu }) => (openMenu ? '0' : '100%')};
 `;
 
@@ -32,19 +32,23 @@ export const CloseIcon = styled(MdCancel)`
 `;
 
 export const MenuWrapper = styled.div`
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
   width: 100%;
 `;
 
-export const Wrapper = styled.div``;
+export const Wrapper = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
 
 export const MenuLiWrap = styled.div`
   display: flex;
   padding: 16px;
   width: 100%;
   align-items: center;
+  margin-bottom: 15px;
 `;
 export const MenuIcon1 = styled(GiSouthKorea)`
   color: rgb(183, 193, 204);

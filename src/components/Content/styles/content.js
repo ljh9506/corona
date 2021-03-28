@@ -9,6 +9,7 @@ export const MainLayout = styled.div`
   @media screen and (max-width: 750px) {
     flex-direction: column;
     align-items: center;
+    padding-top: 0;
   }
 `;
 export const MainContentSection = styled.section`
@@ -26,7 +27,7 @@ export const MainContentSection = styled.section`
 
 export const TopContainer = styled.div`
   width: 100%;
-  background-color: rgb(25, 31, 44);
+  background-color: ${({ theme }) => theme.bodyBgColor};
   border: 1px solid rgba(207, 207, 207, 0.25);
   border-radius: 16px;
   padding: 0 20px;
@@ -71,7 +72,7 @@ export const CheckerWrap = styled.div`
 
 export const H3 = styled.h3`
   font-size: 12px;
-  color: rgb(183, 193, 204);
+  color: ${({ theme }) => theme.fontColor};
   margin: 0;
 `;
 
@@ -79,14 +80,14 @@ export const Figure = styled.div`
   font-size: 16px;
   font-weight: bold;
   margin: 5px 0 10px 0;
-  color: ${({ confirmed, recovered, checker }) =>
+  color: ${({ confirmed, recovered, checker, theme }) =>
     confirmed
       ? 'rgb(235, 83, 116)'
       : recovered
       ? 'rgb(23, 138, 23)'
       : checker
       ? 'rgb(86, 115, 235)'
-      : 'rgb(183, 193, 204)'};
+      : theme.fontColor};
 `;
 export const IncreaseWrap = styled.div`
   display: flex;
@@ -132,13 +133,15 @@ export const UpIcon = styled(AiOutlineArrowUp)`
 
 export const MiddleContainer = styled.div`
   width: 100%;
-  background-color: rgb(25, 31, 44);
+  background-color: ${({ theme }) => theme.bodyBgColor};
+
   border: 1px solid rgba(207, 207, 207, 0.25);
   border-radius: 16px;
   margin-top: 18px;
   padding: 0 20px;
   @media screen and (max-width: 480px) {
     padding: 0;
+    margin-top: 6px;
   }
 `;
 
@@ -155,7 +158,7 @@ export const TodayConfirmedWrap = styled.div`
 `;
 
 export const TodayConfirmedP = styled.div`
-  color: rgb(183, 193, 204);
+  color: ${({ theme }) => theme.fontColor};
   font-size: 12px;
   @media screen and (max-width: 480px) {
     font-size: 8px;
@@ -163,7 +166,8 @@ export const TodayConfirmedP = styled.div`
 `;
 
 export const TodayConfirmedFigure = styled.h2`
-  color: rgb(207, 207, 207);
+  color: ${({ theme }) => theme.fontColor};
+
   font-size: 32px;
   margin: 4px 0;
 
@@ -183,22 +187,16 @@ export const VsWrap = styled.div`
 `;
 
 export const VsDate = styled.div`
-  color: rgb(183, 193, 204);
+  color: ${({ theme }) => theme.fontColor};
+
   font-size: 12px;
   margin-right: 6px;
 `;
 
-export const VsFigure = styled.div`
-  font-size: 12px;
-  margin-left: 6px;
-  background: rgba(235, 83, 116, 0.082);
-  color: rgb(235, 83, 116);
-  border-radius: 20px;
-`;
-
 export const BottomContainer = styled.div`
   width: 100%;
-  background-color: rgb(25, 31, 44);
+  background-color: ${({ theme }) => theme.bodyBgColor};
+
   border: 1px solid rgba(207, 207, 207, 0.25);
   border-radius: 16px;
   padding: 12px 20px;
@@ -206,11 +204,13 @@ export const BottomContainer = styled.div`
 
   @media screen and (max-width: 480px) {
     padding: 0;
+    margin-top: 6px;
   }
 `;
 
 export const ContentH2 = styled.div`
-  color: rgb(207, 207, 207);
+  color: ${({ theme }) => theme.fontColor};
+  font-weight: bold;
   padding: 14px 14px 20px 5px;
 `;
 
@@ -227,7 +227,6 @@ export const ChartInputWrapper = styled.div`
 export const ChartInput = styled.input`
   background-color: black;
   outline: none;
-  color: pink;
 
   &:focus {
     outline: none;
@@ -260,7 +259,8 @@ export const ChartInput = styled.input`
   }
 `;
 export const ChartLabel = styled.label`
-  color: rgb(207, 207, 207);
+  color: ${({ theme }) => theme.fontColor};
+
   margin-right: 12px;
   user-select: none;
   font-size: 14px;

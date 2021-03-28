@@ -34,7 +34,7 @@ import {
 import Menu from '../Menu';
 import Sidebar from '../Sidebar';
 
-const Content = ({ openMenu, setOpenMenu }) => {
+const Content = ({ openMenu, setOpenMenu, toggleTheme, theme }) => {
   const [selected, setSelected] = useState('KR');
   const [showChart, setShowChart] = useState('Bar');
   const [searchCountry, setSearchCountry] = useState('kr');
@@ -274,7 +274,10 @@ const Content = ({ openMenu, setOpenMenu }) => {
                         display: true,
                         position: 'bottom',
                         labels: {
-                          fontColor: 'rgb(183, 193, 204)',
+                          fontColor:
+                            theme === 'dark'
+                              ? 'rgb(183, 193, 204)'
+                              : 'rgb(70,77,82)',
                           padding: 20,
                         },
                       },
@@ -282,14 +285,21 @@ const Content = ({ openMenu, setOpenMenu }) => {
                         xAxes: [
                           {
                             ticks: {
-                              fontColor: 'rgb(183, 193, 204)',
+                              fontColor:
+                                theme === 'dark'
+                                  ? 'rgb(183, 193, 204)'
+                                  : 'rgb(70,77,82)',
                             },
                           },
                         ],
                         yAxes: [
                           {
                             ticks: {
-                              fontColor: 'rgb(183, 193, 204)',
+                              fontColor:
+                                theme === 'dark'
+                                  ? 'rgb(183, 193, 204)'
+                                  : 'rgb(70,77,82)',
+                              fontSize: '9',
                             },
                           },
                         ],
@@ -316,7 +326,10 @@ const Content = ({ openMenu, setOpenMenu }) => {
                         display: true,
                         position: 'bottom',
                         labels: {
-                          fontColor: 'rgb(183, 193, 204)',
+                          fontColor:
+                            theme === 'dark'
+                              ? 'rgb(183, 193, 204)'
+                              : 'rgb(70,77,82)',
                           padding: 20,
                         },
                       },
@@ -324,14 +337,21 @@ const Content = ({ openMenu, setOpenMenu }) => {
                         xAxes: [
                           {
                             ticks: {
-                              fontColor: 'rgb(183, 193, 204)',
+                              fontColor:
+                                theme === 'dark'
+                                  ? 'rgb(183, 193, 204)'
+                                  : 'rgb(70,77,82)',
                             },
                           },
                         ],
                         yAxes: [
                           {
                             ticks: {
-                              fontColor: 'rgb(183, 193, 204)',
+                              fontColor:
+                                theme === 'dark'
+                                  ? 'rgb(183, 193, 204)'
+                                  : 'rgb(70,77,82)',
+                              fontSize: '9',
                             },
                           },
                         ],
@@ -360,7 +380,10 @@ const Content = ({ openMenu, setOpenMenu }) => {
                         display: true,
                         position: 'bottom',
                         labels: {
-                          fontColor: 'rgb(183, 193, 204)',
+                          fontColor:
+                            theme === 'dark'
+                              ? 'rgb(183, 193, 204)'
+                              : 'rgb(70,77,82)',
                           padding: 20,
                         },
                       },
@@ -376,6 +399,9 @@ const Content = ({ openMenu, setOpenMenu }) => {
         selected={selected}
         setSelected={setSelected}
         setSearchCountry={setSearchCountry}
+        toggleTheme={toggleTheme}
+        openMenu={openMenu}
+        setOpenMenu={setOpenMenu}
       />
       <Sidebar
         setOpenMenu={setOpenMenu}

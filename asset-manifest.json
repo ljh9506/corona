@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/corona/static/js/main.475f1318.chunk.js",
-    "main.js.map": "/corona/static/js/main.475f1318.chunk.js.map",
+    "main.js": "/corona/static/js/main.d9f607ce.chunk.js",
+    "main.js.map": "/corona/static/js/main.d9f607ce.chunk.js.map",
     "runtime-main.js": "/corona/static/js/runtime-main.b01b661d.js",
     "runtime-main.js.map": "/corona/static/js/runtime-main.b01b661d.js.map",
     "static/js/2.342e4518.chunk.js": "/corona/static/js/2.342e4518.chunk.js",
@@ -14,6 +14,6 @@
   "entrypoints": [
     "static/js/runtime-main.b01b661d.js",
     "static/js/2.342e4518.chunk.js",
-    "static/js/main.475f1318.chunk.js"
+    "static/js/main.d9f607ce.chunk.js"
   ]
 }
